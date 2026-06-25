@@ -1,0 +1,23 @@
+{
+  "name": "Global Radio Jukebox",
+  "short_name": "RadioBox",
+  "description": "Ascolta stazioni radio da tutto il mondo",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0d0d1a",
+  "theme_color": "#e94560",
+  "orientation": "any",
+  "categories": ["music", "entertainment"],
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

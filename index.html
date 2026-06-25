@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Global Radio Jukebox - Ascolta stazioni radio da tutto il mondo">
+  <meta name="theme-color" content="#e94560">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' https://*.tile.openstreetmap.org https://favicon.rss2json.com data:; connect-src 'self' https://*.radio-browser.info; font-src 'self';">
+  <link rel="manifest" href="manifest.json">
+  <title>Global Radio Jukebox</title>
+</head>
+<body>
+
+  <!-- OFFLINE OVERLAY -->
+  <div class="offline-overlay" id="offlineOverlay" role="alert" aria-live="assertive">
+    <div class="icon" aria-hidden="true">📡</div>
+    <h2>OFFLINE</h2>
+    <p>Connessione non disponibile. Le stazioni non possono essere riprodotte.</p>
+    <button id="retryBtn">RIPROVA</button>
+  </div>
+
+  <!-- MAP OVERLAY -->
+  <div class="map-overlay" id="mapOverlay" role="dialog" aria-label="Mappa del mondo" aria-modal="true">
+    <div class="map-container">
+      <div class="map-header">
+        <h2>MAPPA MONDO</h2>
+        <button class="map-close" id="closeMap" aria-label="Chiudi mappa">✕</button>
+      </div>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <!-- SHORTCUTS MODAL -->
+  <div class="shortcuts-modal" id="shortcutsModal" role="dialog" aria-label="Scorciatoie da tastiera" aria-modal="true">
+    <div class="shortcuts-content">
+      <h2>SHORTCUTS</h2>
+      <div class="shortcut-row"><span>Play / Pausa</span><span class="shortcut-key">Space</span></div>
+      <div class="shortcut-row"><span>Mute</span><span class="shortcut-key">M</span></div>
+      <div class="shortcut-row"><span>Preferito</span><span class="shortcut-key">F</span></div>
+      <div class="shortcut-row"><span>Shortcuts</span><span class="shortcut-key">?</span></div>
+      <div class="shortcut-close">
+        <button class="page-btn" id="closeShortcuts">CHIUDI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER (created by JS if needed) -->
+
+  <!-- APP -->
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Navigazione">
+      <div class="sidebar-header">
+        <h1>Global Jukebox</h1>
+        <div class="subtitle">59,000+ STAZIONI</div>
+      </div>
+      <nav class="nav-list">
+        <button class="nav-item active" data-section="search" aria-label="Cerca stazioni">
+          <span class="icon" aria-hidden="true">🔍</span> CERCA
+        </button>
+        <button class="nav-item" data-section="countries" aria-label="Sfoglia per paese">
+          <span class="icon" aria-hidden="true">🌍</span> PAESI
+        </button>
+        <button class="nav-item" data-section="languages" aria-label="Sfoglia per lingua">
+          <span class="icon" aria-hidden="true">🗣</span> LINGUE
+        </button>
+        <button class="nav-item" data-section="tags" aria-label="Sfoglia per genere">
+          <span class="icon" aria-hidden="true">🏷</span> GENERI
+        </button>
+        <button class="nav-item" data-section="top" aria-label="Top stazioni votate">
+          <span class="icon" aria-hidden="true">⭐</span> TOP VOTATE
+        </button>
+        <button class="nav-item" data-section="favorites" aria-label="Stazioni preferite">
+          <span class="icon" aria-hidden="true">❤</span> PREFERITI
+        </button>
+        <button class="nav-item" data-section="history" aria-label="Cronologia ascolti">
+          <span class="icon" aria-hidden="true">📜</span> CRONOLOGIA
+        </button>
+        <button class="nav-item" data-section="eq" aria-label="Equalizer">
+          <span class="icon" aria-hidden="true">🎛</span> EQUALIZER
+        </button>
+        <button class="nav-item" id="openMap" aria-label="Apri mappa del mondo">
+          <span class="icon" aria-hidden="true">🗺</span> MAPPA
+        </button>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- HEADER -->
+      <header class="header">
+        <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">☰</button>
+        <div class="header-center">
+          <h1>Global Radio Jukebox</h1>
+        </div>
+        <div class="header-actions">
+          <button class="header-btn" id="themeBtn" title="Tema" aria-label="Cambia tema">🌙</button>
+          <button class="header-btn" id="shortcutsBtn" title="Shortcuts" aria-label="Mostra scorciatoie">⌨</button>
+          <button class="header-btn" id="exportBtn" title="Esporta dati" aria-label="Esporta dati">💾</button>
+          <button class="header-btn" id="importBtn" title="Importa dati" aria-label="Importa dati">📂</button>
+          <input type="file" id="importInput" accept=".json" style="display:none" aria-hidden="true">
+        </div>
+      </header>
+
+      <!-- NOW PLAYING -->
+      <div class="now-playing" aria-live="polite" aria-label="Stazione in riproduzione">
+        <div class="np-content">
+          <div class="np-favicon" id="npFavicon">📻</div>
+          <div class="np-info">
+            <div class="np-station-name" id="npName">NESSUNA STAZIONE</div>
+            <div class="np-details">
+              <span id="npCountry">Seleziona una stazione</span>
+              <span id="npCodec"></span>
+              <span id="npBitrate"></span>
+            </div>
+          </div>
+          <div class="np-actions">
+            <button class="np-action-btn" id="npFavBtn" title="Preferito" aria-label="Aggiungi ai preferiti">♡</button>
+            <button class="np-action-btn" id="shareBtn" title="Condividi" aria-label="Condividi stazione">🔗</button>
+          </div>
+        </div>
+        <div class="vu-meter" id="vuMeter" role="meter" aria-label="Livello audio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+      </div>
+
+      <!-- TRANSPORT -->
+      <div class="transport" role="toolbar" aria-label="Controlli riproduzione">
+        <button class="transport-btn" id="prevBtn" title="Precedente" aria-label="Stazione precedente">⏮</button>
+        <button class="transport-btn play-btn" id="playBtn" title="Play/Pausa" aria-label="Play">▶</button>
+        <button class="transport-btn" id="nextBtn" title="Successiva" aria-label="Stazione successiva">⏭</button>
+        <div class="volume-wrap">
+          <span class="volume-icon" id="volumeIcon" aria-hidden="true">🔊</span>
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="75" aria-label="Volume">
+          <span class="volume-val" id="volumeVal">75%</span>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content" id="content"></div>
+
+    </main>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

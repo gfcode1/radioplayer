@@ -1,0 +1,199 @@
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px 16px;
+}
+
+/* ── Station List ────────────────────────────────────────── */
+.station-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ── Station Card — Vintage Selector ─────────────────────── */
+.station-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%),
+    var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+.station-card:hover {
+  background: var(--bg-card-hover);
+  border-left-color: var(--accent);
+  transform: translateX(3px);
+  box-shadow: var(--shadow-md);
+}
+.station-card.playing {
+  border-left-color: var(--neon-amber);
+  background: rgba(255, 170, 0, 0.04);
+  box-shadow:
+    0 0 10px rgba(255, 170, 0, 0.08),
+    var(--shadow-md);
+}
+.station-card.playing .sc-name {
+  color: var(--neon-amber);
+  text-shadow: 0 0 6px rgba(255, 170, 0, 0.3);
+}
+
+/* ── Favicon — Mini Chrome Ring ──────────────────────────── */
+.sc-favicon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--border-light);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.sc-favicon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* ── Station Info ────────────────────────────────────────── */
+.sc-info {
+  flex: 1;
+  min-width: 0;
+}
+.sc-name {
+  font-size: 0.75rem;
+  font-family: 'Courier New', monospace;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+.sc-meta {
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  letter-spacing: 0.5px;
+}
+
+/* ── Favorite Button ─────────────────────────────────────── */
+.sc-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.sc-action {
+  background: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  padding: 4px 6px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+.sc-action:hover {
+  color: var(--neon-amber);
+  background: rgba(255, 170, 0, 0.06);
+}
+.sc-action.fav-active {
+  color: var(--neon-red);
+  text-shadow: 0 0 4px rgba(255, 51, 51, 0.3);
+}
+
+/* ── Pagination ──────────────────────────────────────────── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 8px 0;
+}
+.page-btn {
+  background: linear-gradient(180deg, #3a2c1a 0%, #2e2214 100%);
+  border: 1px solid var(--border);
+  border-top-color: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all var(--transition-fast);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+.page-btn:hover {
+  border-color: var(--accent);
+  color: var(--neon-amber);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    0 0 8px rgba(255, 170, 0, 0.08);
+}
+.page-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.page-info {
+  font-size: 0.6rem;
+  font-family: 'Courier New', monospace;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ── Empty State ─────────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+}
+.empty-state .icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+.empty-state p {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+/* ── Loading ─────────────────────────────────────────────── */
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: var(--neon-amber-dim);
+  font-size: 0.7rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-shadow: 0 0 4px rgba(255, 170, 0, 0.2);
+}
+.loading::after {
+  content: '';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+@keyframes dots {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+}

@@ -1,0 +1,132 @@
+/* ── Shortcuts Modal ─────────────────────────────────────── */
+.shortcuts-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlay);
+  z-index: 600;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.shortcuts-modal.open {
+  display: flex;
+}
+.shortcuts-content {
+  background: linear-gradient(180deg, #2e2214 0%, #261c0f 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.shortcuts-content h2 {
+  font-size: 0.8rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+  color: var(--neon-amber);
+  text-shadow: 0 0 6px rgba(255, 170, 0, 0.4);
+}
+.shortcut-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.7rem;
+}
+.shortcut-row:last-child {
+  border-bottom: none;
+}
+.shortcut-key {
+  background: linear-gradient(180deg, #3a2c1a 0%, #2e2214 100%);
+  border: 1px solid var(--border);
+  border-top-color: rgba(255, 255, 255, 0.06);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.6rem;
+  font-family: 'Courier New', monospace;
+  color: var(--neon-amber);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ── Offline Overlay ─────────────────────────────────────── */
+.offline-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-primary);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+  padding: 20px;
+}
+.offline-overlay.open {
+  display: flex;
+}
+.offline-overlay .icon {
+  font-size: 3rem;
+}
+.offline-overlay h2 {
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 3px;
+  color: var(--neon-amber);
+  text-shadow: 0 0 8px rgba(255, 170, 0, 0.5);
+}
+.offline-overlay p {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  max-width: 300px;
+}
+.offline-overlay button {
+  background: linear-gradient(180deg, #d4883e 0%, #c87533 40%, #a0602a 100%);
+  color: #1c140a;
+  padding: 8px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.offline-overlay button:hover {
+  box-shadow:
+    0 3px 10px rgba(0, 0, 0, 0.4),
+    0 0 10px rgba(200, 117, 51, 0.2);
+}
+
+/* ── Shortcut Close ────────────────────────────────────── */
+.shortcut-close {
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* ── EQ Toggle (Search View) ───────────────────────────── */
+.eq-toggle-wrap {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.eq-toggle-btn {
+  font-size: 0.65rem;
+}

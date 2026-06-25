@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <rect width="192" height="192" rx="29" fill="#0d0d1a"/>
+  <circle cx="96" cy="80.64" r="42.24" fill="none" stroke="#e94560" stroke-width="3.84"/>
+  <circle cx="96" cy="80.64" r="13.440000000000001" fill="#e94560"/>
+  <rect x="59.519999999999996" y="130.56" width="72.96000000000001" height="7.68" rx="3.84" fill="#e94560" opacity="0.5"/>
+  <rect x="70.464" y="147.84" width="51.072" height="6.144" rx="3.072" fill="#e94560" opacity="0.3"/>
+  <text x="96" y="176.64000000000001" text-anchor="middle" font-family="monospace" font-size="17.28" fill="#e94560" font-weight="bold">RADIO</text>
+</svg>

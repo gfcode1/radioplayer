@@ -1,0 +1,77 @@
+.map-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--overlay);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.map-overlay.open {
+  display: flex;
+}
+.map-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  max-width: 1200px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.map-header h2 {
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  letter-spacing: 2px;
+}
+.map-close {
+  background: none;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  padding: 4px 8px;
+}
+.map-close:hover {
+  color: var(--accent);
+}
+#map {
+  flex: 1;
+  background: var(--bg-card);
+}
+.map-popup {
+  font-family: 'Courier New', monospace;
+}
+.map-popup h3 {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  color: #333;
+}
+.map-popup p {
+  font-size: 0.65rem;
+  color: #666;
+  margin: 2px 0;
+}
+.map-popup button {
+  margin-top: 6px;
+  background: #e94560;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 3px;
+  font-size: 0.7rem;
+}
+.map-popup button:hover {
+  background: #ff5a75;
+}
