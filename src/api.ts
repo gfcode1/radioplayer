@@ -156,5 +156,5 @@ export async function getStationsByUuids(uuids: string[]): Promise<Station[]> {
 /* ── click tracking ───────────────────────────────────────── */
 
 export function countClick(uuid: string): void {
-  fetch(`${API_SERVERS[currentServerIndex]}/json/stations/byuuid/${uuid}/click`).catch(() => {});
+  fetch(`${API_SERVERS[currentServerIndex]}/url/${uuid}`).catch(() => {});
 }
