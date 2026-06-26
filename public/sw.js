@@ -1,4 +1,4 @@
-const CACHE_NAME = 'radio-jukebox-v2';
+const CACHE_NAME = 'gfradio-v1';
 
 self.addEventListener('install', (event) => {
   /* Pre-cache app shell using scope-relative paths */

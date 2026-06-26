@@ -50,7 +50,7 @@ export async function loadSection(): Promise<void> {
       break;
     case 'countries':
       if (!cachedCountries) {
-        content.innerHTML = '<div class="loading">Caricamento paesi</div>';
+        content.innerHTML = '<div class="loading">Loading countries</div>';
         cachedCountries = await getCountries();
       }
       if (isStale()) return;
@@ -58,7 +58,7 @@ export async function loadSection(): Promise<void> {
       break;
     case 'languages':
       if (!cachedLanguages) {
-        content.innerHTML = '<div class="loading">Caricamento lingue</div>';
+        content.innerHTML = '<div class="loading">Loading languages</div>';
         cachedLanguages = await getLanguages();
       }
       if (isStale()) return;
@@ -66,14 +66,14 @@ export async function loadSection(): Promise<void> {
       break;
     case 'tags':
       if (!cachedTags) {
-        content.innerHTML = '<div class="loading">Caricamento generi</div>';
+        content.innerHTML = '<div class="loading">Loading genres</div>';
         cachedTags = await getTags();
       }
       if (isStale()) return;
       renderItemList(cachedTags, 'tag', content);
       break;
     case 'top':
-      content.innerHTML = '<div class="loading">Caricamento top stazioni</div>';
+      content.innerHTML = '<div class="loading">Loading top stations</div>';
       try {
         const top = await getTopStations(50);
         if (isStale()) return;
@@ -82,34 +82,34 @@ export async function loadSection(): Promise<void> {
         renderStationList(top, content);
       } catch {
         if (isStale()) return;
-        content.innerHTML = '<div class="empty-state"><p>Errore nel caricamento</p></div>';
+        content.innerHTML = '<div class="empty-state"><p>Error loading data</p></div>';
       }
       break;
     case 'favorites':
-      content.innerHTML = '<div class="loading">Caricamento preferiti</div>';
+      content.innerHTML = '<div class="loading">Loading favorites</div>';
       try {
         const favs = await getFavoriteStations();
         if (isStale()) return;
         store.currentList = favs;
         store.totalPages = 1;
-        renderStationList(favs, content, 'Nessun preferito. Clicca ♡ per aggiungere.');
+        renderStationList(favs, content, 'No favorites yet. Click ♡ to add.');
       } catch {
         if (isStale()) return;
-        content.innerHTML = '<div class="empty-state"><p>Errore nel caricamento</p></div>';
+        content.innerHTML = '<div class="empty-state"><p>Error loading data</p></div>';
       }
       break;
     case 'history': {
       if (store.history.length === 0) {
-        renderStationList([], content, 'Nessuna cronologia.');
+        renderStationList([], content, 'No history yet.');
         break;
       }
-      content.innerHTML = '<div class="loading">Caricamento cronologia</div>';
+      content.innerHTML = '<div class="loading">Loading history</div>';
       const uuids = store.history.map((h) => h.uuid);
       const histStations = await getStationsByUuids(uuids);
       if (isStale()) return;
       store.currentList = histStations;
       store.totalPages = 1;
-      renderStationList(histStations, content, 'Nessuna cronologia.');
+      renderStationList(histStations, content, 'No history yet.');
       break;
     }
     case 'eq':
@@ -131,23 +131,23 @@ function renderSearchView(content: HTMLElement): void {
   /* Search bar */
   html += `
     <div class="search-bar">
-      <input class="search-input" type="text" id="searchInput" placeholder="Cerca stazione..." aria-label="Cerca stazione radio" value="${escAttr(store.searchQuery)}">
-      <button class="search-btn" id="searchBtn" aria-label="Cerca">CERCA</button>
+      <input class="search-input" type="text" id="searchInput" placeholder="Search station..." aria-label="Search radio station" value="${escAttr(store.searchQuery)}">
+      <button class="search-btn" id="searchBtn" aria-label="Search">SEARCH</button>
     </div>`;
 
   /* Filters */
   if (store.filters.country || store.filters.language || store.filters.tag) {
-    html += '<div class="filter-chips" role="group" aria-label="Filtri attivi">';
+    html += '<div class="filter-chips" role="group" aria-label="Active filters">';
     if (store.filters.country)
-      html += `<span class="chip active" data-clear="country" role="button" tabindex="0" aria-label="Rimuovi filtro paese: ${escAttr(store.filters.country)}">🌍 ${escHtml(store.filters.country)} ✕</span>`;
+      html += `<span class="chip active" data-clear="country" role="button" tabindex="0" aria-label="Remove country filter: ${escAttr(store.filters.country)}">🌍 ${escHtml(store.filters.country)} ✕</span>`;
     if (store.filters.language)
-      html += `<span class="chip active" data-clear="language" role="button" tabindex="0" aria-label="Rimuovi filtro lingua: ${escAttr(store.filters.language)}">🗣 ${escHtml(store.filters.language)} ✕</span>`;
+      html += `<span class="chip active" data-clear="language" role="button" tabindex="0" aria-label="Remove language filter: ${escAttr(store.filters.language)}">🗣 ${escHtml(store.filters.language)} ✕</span>`;
     if (store.filters.tag)
-      html += `<span class="chip active" data-clear="tag" role="button" tabindex="0" aria-label="Rimuovi filtro genere: ${escAttr(store.filters.tag)}">🏷 ${escHtml(store.filters.tag)} ✕</span>`;
+      html += `<span class="chip active" data-clear="tag" role="button" tabindex="0" aria-label="Remove genre filter: ${escAttr(store.filters.tag)}">🏷 ${escHtml(store.filters.tag)} ✕</span>`;
     html += '</div>';
   }
 
-  html += '<div id="searchResults"><div class="loading">Caricamento</div></div>';
+  html += '<div id="searchResults"><div class="loading">Loading</div></div>';
   content.innerHTML = html;
 
   /* events */
@@ -209,7 +209,7 @@ async function loadSearchResults(): Promise<void> {
     renderStationList(stations, container);
   } catch {
     if (requestId !== sectionRequestId) return;
-    container.innerHTML = '<div class="empty-state"><p>Errore nella ricerca</p></div>';
+    container.innerHTML = '<div class="empty-state"><p>Search error</p></div>';
   }
 }
 
@@ -219,7 +219,7 @@ function renderItemList(
   container: HTMLElement,
 ): void {
   if (!items || items.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>Nessun elemento</p></div>';
+    container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>No items</p></div>';
     return;
   }
 
@@ -227,8 +227,8 @@ function renderItemList(
   items.forEach((item) => {
     const count = item.stationcount ?? '';
     const isoCode = item.iso_3166_1 ?? '';
-    html += `
-      <div class="dd-item" data-label="${escAttr(item.name)}" data-iso="${escAttr(isoCode)}" data-type="${type}" role="listitem" tabindex="0" aria-label="${escAttr(item.name)}${count ? ', ' + count + ' stazioni' : ''}">
+      html += `
+      <div class="dd-item" data-label="${escAttr(item.name)}" data-iso="${escAttr(isoCode)}" data-type="${type}" role="listitem" tabindex="0" aria-label="${escAttr(item.name)}${count ? ', ' + count + ' stations' : ''}">
         <span>${escHtml(item.name)}</span>
         ${count ? `<span class="count">${count}</span>` : ''}
       </div>`;
@@ -279,5 +279,5 @@ export function playStationFromMap(uuid: string): void {
         store.emit('close-map');
       }
     })
-    .catch(() => toast('Stazione non trovata', 'error'));
+    .catch(() => toast('Station not found', 'error'));
 }

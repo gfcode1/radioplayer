@@ -1,6 +1,6 @@
-# Global Radio Jukebox
+# GFradio
 
-Ascolta stazioni radio da tutto il mondo con un'interfaccia ispirata ai jukebox vintage.
+Listen to radio stations from around the world with a vintage jukebox-inspired interface.
 
 ## Features
 

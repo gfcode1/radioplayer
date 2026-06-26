@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Global Radio Jukebox - Ascolta stazioni radio da tutto il mondo">
+  <meta name="description" content="GFradio - Listen to radio stations from around the world">
   <meta name="theme-color" content="#e94560">
   <link rel="manifest" href="manifest.json">
-  <title>Global Radio Jukebox</title>
+  <title>GFradio</title>
 </head>
 <body>
 
@@ -14,31 +14,31 @@
   <div class="offline-overlay" id="offlineOverlay" role="alert" aria-live="assertive">
     <div class="icon" aria-hidden="true">📡</div>
     <h2>OFFLINE</h2>
-    <p>Connessione non disponibile. Le stazioni non possono essere riprodotte.</p>
-    <button id="retryBtn">RIPROVA</button>
+    <p>Connection unavailable. Stations cannot be played.</p>
+    <button id="retryBtn">RETRY</button>
   </div>
 
   <!-- MAP OVERLAY -->
   <div class="map-overlay" id="mapOverlay" role="dialog" aria-label="Mappa del mondo" aria-modal="true">
     <div class="map-container">
       <div class="map-header">
-        <h2>MAPPA MONDO</h2>
-        <button class="map-close" id="closeMap" aria-label="Chiudi mappa">✕</button>
+        <h2>WORLD MAP</h2>
+        <button class="map-close" id="closeMap" aria-label="Close map">✕</button>
       </div>
       <div id="map"></div>
     </div>
   </div>
 
   <!-- SHORTCUTS MODAL -->
-  <div class="shortcuts-modal" id="shortcutsModal" role="dialog" aria-label="Scorciatoie da tastiera" aria-modal="true">
+  <div class="shortcuts-modal" id="shortcutsModal" role="dialog" aria-label="Keyboard shortcuts" aria-modal="true">
     <div class="shortcuts-content">
       <h2>SHORTCUTS</h2>
-      <div class="shortcut-row"><span>Play / Pausa</span><span class="shortcut-key">Space</span></div>
+      <div class="shortcut-row"><span>Play / Pause</span><span class="shortcut-key">Space</span></div>
       <div class="shortcut-row"><span>Mute</span><span class="shortcut-key">M</span></div>
-      <div class="shortcut-row"><span>Preferito</span><span class="shortcut-key">F</span></div>
+      <div class="shortcut-row"><span>Favorite</span><span class="shortcut-key">F</span></div>
       <div class="shortcut-row"><span>Shortcuts</span><span class="shortcut-key">?</span></div>
       <div class="shortcut-close">
-        <button class="page-btn" id="closeShortcuts">CHIUDI</button>
+        <button class="page-btn" id="closeShortcuts">CLOSE</button>
       </div>
     </div>
   </div>
@@ -49,38 +49,38 @@
   <div class="app">
 
     <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Navigazione">
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Navigation">
       <div class="sidebar-header">
-        <h1>Global Jukebox</h1>
-        <div class="subtitle">59,000+ STAZIONI</div>
+        <h1>GFradio</h1>
+        <div class="subtitle">59,000+ STATIONS</div>
       </div>
       <nav class="nav-list">
-        <button class="nav-item active" data-section="search" aria-label="Cerca stazioni">
-          <span class="icon" aria-hidden="true">🔍</span> CERCA
+        <button class="nav-item active" data-section="search" aria-label="Search stations">
+          <span class="icon" aria-hidden="true">🔍</span> SEARCH
         </button>
-        <button class="nav-item" data-section="countries" aria-label="Sfoglia per paese">
-          <span class="icon" aria-hidden="true">🌍</span> PAESI
+        <button class="nav-item" data-section="countries" aria-label="Browse by country">
+          <span class="icon" aria-hidden="true">🌍</span> COUNTRIES
         </button>
-        <button class="nav-item" data-section="languages" aria-label="Sfoglia per lingua">
-          <span class="icon" aria-hidden="true">🗣</span> LINGUE
+        <button class="nav-item" data-section="languages" aria-label="Browse by language">
+          <span class="icon" aria-hidden="true">🗣</span> LANGUAGES
         </button>
-        <button class="nav-item" data-section="tags" aria-label="Sfoglia per genere">
-          <span class="icon" aria-hidden="true">🏷</span> GENERI
+        <button class="nav-item" data-section="tags" aria-label="Browse by genre">
+          <span class="icon" aria-hidden="true">🏷</span> GENRES
         </button>
-        <button class="nav-item" data-section="top" aria-label="Top stazioni votate">
-          <span class="icon" aria-hidden="true">⭐</span> TOP VOTATE
+        <button class="nav-item" data-section="top" aria-label="Top voted stations">
+          <span class="icon" aria-hidden="true">⭐</span> TOP VOTED
         </button>
-        <button class="nav-item" data-section="favorites" aria-label="Stazioni preferite">
-          <span class="icon" aria-hidden="true">❤</span> PREFERITI
+        <button class="nav-item" data-section="favorites" aria-label="Favorite stations">
+          <span class="icon" aria-hidden="true">❤</span> FAVORITES
         </button>
-        <button class="nav-item" data-section="history" aria-label="Cronologia ascolti">
-          <span class="icon" aria-hidden="true">📜</span> CRONOLOGIA
+        <button class="nav-item" data-section="history" aria-label="Listening history">
+          <span class="icon" aria-hidden="true">📜</span> HISTORY
         </button>
         <button class="nav-item" data-section="eq" aria-label="Equalizer">
           <span class="icon" aria-hidden="true">🎛</span> EQUALIZER
         </button>
-        <button class="nav-item" id="openMap" aria-label="Apri mappa del mondo">
-          <span class="icon" aria-hidden="true">🗺</span> MAPPA
+        <button class="nav-item" id="openMap" aria-label="Open world map">
+          <span class="icon" aria-hidden="true">🗺</span> MAP
         </button>
       </nav>
     </aside>
@@ -90,44 +90,44 @@
 
       <!-- HEADER -->
       <header class="header">
-        <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">☰</button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">☰</button>
         <div class="header-center">
-          <h1>Global Radio Jukebox</h1>
+          <h1>GFradio</h1>
         </div>
         <div class="header-actions">
-          <button class="header-btn" id="themeBtn" title="Tema" aria-label="Cambia tema">🌙</button>
-          <button class="header-btn" id="shortcutsBtn" title="Shortcuts" aria-label="Mostra scorciatoie">⌨</button>
-          <button class="header-btn" id="exportBtn" title="Esporta dati" aria-label="Esporta dati">💾</button>
-          <button class="header-btn" id="importBtn" title="Importa dati" aria-label="Importa dati">📂</button>
+          <button class="header-btn" id="themeBtn" title="Theme" aria-label="Change theme">🌙</button>
+          <button class="header-btn" id="shortcutsBtn" title="Shortcuts" aria-label="Show keyboard shortcuts">⌨</button>
+          <button class="header-btn" id="exportBtn" title="Export data" aria-label="Export data">💾</button>
+          <button class="header-btn" id="importBtn" title="Import data" aria-label="Import data">📂</button>
           <input type="file" id="importInput" accept=".json" style="display:none" aria-hidden="true">
         </div>
       </header>
 
       <!-- NOW PLAYING -->
-      <div class="now-playing" aria-live="polite" aria-label="Stazione in riproduzione">
+      <div class="now-playing" aria-live="polite" aria-label="Now playing">
         <div class="np-content">
           <div class="np-favicon" id="npFavicon">📻</div>
           <div class="np-info">
-            <div class="np-station-name" id="npName">NESSUNA STAZIONE</div>
+            <div class="np-station-name" id="npName">NO STATION</div>
             <div class="np-details">
-              <span id="npCountry">Seleziona una stazione</span>
+              <span id="npCountry">Select a station</span>
               <span id="npCodec"></span>
               <span id="npBitrate"></span>
             </div>
           </div>
           <div class="np-actions">
-            <button class="np-action-btn" id="npFavBtn" title="Preferito" aria-label="Aggiungi ai preferiti">♡</button>
-            <button class="np-action-btn" id="shareBtn" title="Condividi" aria-label="Condividi stazione">🔗</button>
+            <button class="np-action-btn" id="npFavBtn" title="Favorite" aria-label="Add to favorites">♡</button>
+            <button class="np-action-btn" id="shareBtn" title="Share" aria-label="Share station">🔗</button>
           </div>
         </div>
-        <div class="vu-meter" id="vuMeter" role="meter" aria-label="Livello audio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        <div class="vu-meter" id="vuMeter" role="meter" aria-label="Audio level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
       </div>
 
       <!-- TRANSPORT -->
-      <div class="transport" role="toolbar" aria-label="Controlli riproduzione">
-        <button class="transport-btn" id="prevBtn" title="Precedente" aria-label="Stazione precedente">⏮</button>
-        <button class="transport-btn play-btn" id="playBtn" title="Play/Pausa" aria-label="Play">▶</button>
-        <button class="transport-btn" id="nextBtn" title="Successiva" aria-label="Stazione successiva">⏭</button>
+      <div class="transport" role="toolbar" aria-label="Playback controls">
+        <button class="transport-btn" id="prevBtn" title="Previous" aria-label="Previous station">⏮</button>
+        <button class="transport-btn play-btn" id="playBtn" title="Play/Pause" aria-label="Play">▶</button>
+        <button class="transport-btn" id="nextBtn" title="Next" aria-label="Next station">⏭</button>
         <div class="volume-wrap">
           <span class="volume-icon" id="volumeIcon" aria-hidden="true">🔊</span>
           <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="75" aria-label="Volume">

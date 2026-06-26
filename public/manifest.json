@@ -1,7 +1,7 @@
 {
-  "name": "Global Radio Jukebox",
-  "short_name": "RadioBox",
-  "description": "Ascolta stazioni radio da tutto il mondo",
+  "name": "GFradio",
+  "short_name": "GFradio",
+  "description": "Listen to radio stations from around the world",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0d0d1a",

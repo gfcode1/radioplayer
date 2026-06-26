@@ -6,7 +6,7 @@ import { playStation } from '../audio';
 export function renderStationList(
   stations: Station[],
   container: HTMLElement,
-  emptyMsg = 'Nessuna stazione trovata',
+  emptyMsg = 'No stations found',
 ): void {
   if (!stations || stations.length === 0) {
     container.innerHTML = `<div class="empty-state"><div class="icon">📻</div><p>${emptyMsg}</p></div>`;
@@ -32,7 +32,7 @@ export function renderStationList(
           </div>
         </div>
         <div class="sc-actions">
-          <button class="sc-action${isFav ? ' fav-active' : ''}" data-fav="${s.stationuuid}" aria-label="${isFav ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti'}">
+          <button class="sc-action${isFav ? ' fav-active' : ''}" data-fav="${s.stationuuid}" aria-label="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
             ${isFav ? '♥' : '♡'}
           </button>
         </div>
@@ -47,10 +47,10 @@ export function renderStationList(
       ? `PAG ${store.page + 1}`
       : `PAG ${store.page + 1} / ${store.totalPages}`;
     html += `
-      <div class="pagination" role="navigation" aria-label="Paginazione">
-        <button class="page-btn" id="pagePrev"${isFirstPage ? ' disabled' : ''} aria-label="Pagina precedente">◀ PREV</button>
+      <div class="pagination" role="navigation" aria-label="Pagination">
+        <button class="page-btn" id="pagePrev"${isFirstPage ? ' disabled' : ''} aria-label="Previous page">◀ PREV</button>
         <span class="page-info" aria-live="polite">${pageInfo}</span>
-        <button class="page-btn" id="pageNext"${isLastPage ? ' disabled' : ''} aria-label="Pagina successiva">NEXT ▶</button>
+        <button class="page-btn" id="pageNext"${isLastPage ? ' disabled' : ''} aria-label="Next page">NEXT ▶</button>
       </div>`;
   }
 

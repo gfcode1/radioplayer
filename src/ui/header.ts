@@ -38,7 +38,7 @@ export function initHeader(): void {
   npFavBtn.addEventListener('click', () => {
     if (!store.currentStation) return;
     const added = store.toggleFavorite(store.currentStation.stationuuid);
-    toast(added ? 'Aggiunto ai preferiti' : 'Rimosso dai preferiti', added ? 'success' : 'info');
+    toast(added ? 'Added to favorites' : 'Removed from favorites', added ? 'success' : 'info');
   });
 
   shareBtn.addEventListener('click', () => {
@@ -46,8 +46,8 @@ export function initHeader(): void {
     const url = `https://www.radio-browser.info/#/uuid/${store.currentStation.stationuuid}`;
     navigator.clipboard
       .writeText(url)
-      .then(() => toast('Link copiato', 'success'))
-      .catch(() => toast('Impossibile copiare', 'error'));
+      .then(() => toast('Link copied', 'success'))
+      .catch(() => toast('Unable to copy', 'error'));
   });
 
   /* listen to state changes */
@@ -58,13 +58,13 @@ export function initHeader(): void {
     volumeIcon.textContent = store.muted ? '🔇' : '🔊';
   });
   store.on('playback-error', () => {
-    toast('Stream non disponibile, skip...', 'error');
+    toast('Stream unavailable, skipping...', 'error');
   });
 
   store.on('toggle-favorite', () => {
     if (!store.currentStation) return;
     const added = store.toggleFavorite(store.currentStation.stationuuid);
-    toast(added ? 'Aggiunto ai preferiti' : 'Rimosso dai preferiti', added ? 'success' : 'info');
+    toast(added ? 'Added to favorites' : 'Removed from favorites', added ? 'success' : 'info');
   });
 
   /* apply persisted state */
@@ -85,7 +85,7 @@ function updateNowPlaying(): void {
     favicon.innerHTML = '📻';
   }
 
-  document.getElementById('npName')!.textContent = s.name || 'SCONOSCIUTA';
+  document.getElementById('npName')!.textContent = s.name || 'UNKNOWN';
   document.getElementById('npCountry')!.textContent = [s.country, s.language]
     .filter(Boolean)
     .join(' • ');
@@ -96,12 +96,12 @@ function updateNowPlaying(): void {
   const isFav = store.isFavorite(s.stationuuid);
   favBtn.textContent = isFav ? '♥' : '♡';
   favBtn.classList.toggle('fav-active', isFav);
-  favBtn.setAttribute('aria-label', isFav ? 'Rimuovi dai preferiti' : 'Aggiungi ai preferiti');
+  favBtn.setAttribute('aria-label', isFav ? 'Remove from favorites' : 'Add to favorites');
 }
 
 function updatePlayButton(): void {
   const playBtn = document.getElementById('playBtn')!;
   playBtn.textContent = store.isPlaying ? '⏸' : '▶';
   playBtn.classList.toggle('playing', store.isPlaying);
-  playBtn.setAttribute('aria-label', store.isPlaying ? 'Pausa' : 'Play');
+  playBtn.setAttribute('aria-label', store.isPlaying ? 'Pause' : 'Play');
 }

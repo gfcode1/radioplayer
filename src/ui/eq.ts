@@ -3,7 +3,7 @@ import { EQ_FREQUENCIES, EQ_PRESETS, setEqBand, setEqPreset } from '../audio';
 
 function buildEqHtml(): string {
   let html = `<div class="eq-title">EQUALIZER</div>`;
-  html += '<div class="eq-presets" role="group" aria-label="Preset equalizer">';
+  html += '<div class="eq-presets" role="group" aria-label="Equalizer presets">';
   for (const name of Object.keys(EQ_PRESETS)) {
     html += `<button class="eq-preset${store.eq.preset === name ? ' active' : ''}" data-preset="${name}" aria-label="Preset ${name}" aria-pressed="${store.eq.preset === name}">${name.toUpperCase()}</button>`;
   }
@@ -14,7 +14,7 @@ function buildEqHtml(): string {
     html += `
       <div class="eq-band">
         <span class="eq-val">${val > 0 ? '+' : ''}${val}dB</span>
-        <input type="range" class="eq-slider" min="-12" max="12" value="${val}" data-eq="${i}" aria-label="Frequenza ${label}Hz" aria-valuenow="${val}" aria-valuemin="-12" aria-valuemax="12">
+        <input type="range" class="eq-slider" min="-12" max="12" value="${val}" data-eq="${i}" aria-label="Frequency ${label}Hz" aria-valuenow="${val}" aria-valuemin="-12" aria-valuemax="12">
         <span class="eq-band-label">${label}Hz</span>
       </div>`;
   });

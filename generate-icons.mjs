@@ -13,7 +13,7 @@ function createSVG(size) {
   const barH = size * 0.04;
   const barY1 = size * 0.68;
   const barY2 = size * 0.77;
-  const fontSize = size * 0.09;
+  const fontSize = size * 0.07;
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
   <rect width="${size}" height="${size}" rx="${r}" fill="#0d0d1a"/>
@@ -21,7 +21,7 @@ function createSVG(size) {
   <circle cx="${cx}" cy="${cy}" r="${innerR}" fill="#e94560"/>
   <rect x="${cx - barW / 2}" y="${barY1}" width="${barW}" height="${barH}" rx="${barH / 2}" fill="#e94560" opacity="0.5"/>
   <rect x="${cx - barW * 0.35}" y="${barY2}" width="${barW * 0.7}" height="${barH * 0.8}" rx="${barH * 0.4}" fill="#e94560" opacity="0.3"/>
-  <text x="${cx}" y="${size * 0.92}" text-anchor="middle" font-family="monospace" font-size="${fontSize}" fill="#e94560" font-weight="bold">RADIO</text>
+  <text x="${cx}" y="${size * 0.92}" text-anchor="middle" font-family="monospace" font-size="${fontSize}" fill="#e94560" font-weight="bold">GFRADIO</text>
 </svg>`;
 }
 

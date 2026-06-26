@@ -9,7 +9,8 @@ import type {
   EventName,
 } from './types';
 
-const STORAGE_KEY = 'jukebox';
+const STORAGE_KEY = 'gfradio';
+const OLD_STORAGE_KEY = 'jukebox';
 
 class Store {
   currentStation: Station | null = null;
@@ -45,7 +46,21 @@ class Store {
   }
 
   /* ── persistence ──────────────────────────────────────────── */
+  private migrateFromOldKey(): void {
+    if (localStorage.getItem(STORAGE_KEY)) return; // already migrated
+    const oldData = localStorage.getItem(OLD_STORAGE_KEY);
+    if (!oldData) return; // nothing to migrate
+    try {
+      JSON.parse(oldData); // validate JSON
+      localStorage.setItem(STORAGE_KEY, oldData);
+      localStorage.removeItem(OLD_STORAGE_KEY);
+    } catch {
+      localStorage.removeItem(OLD_STORAGE_KEY); // corrupt data, remove
+    }
+  }
+
   load(): void {
+    this.migrateFromOldKey();
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;

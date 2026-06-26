@@ -48,7 +48,7 @@ async function loadMarkers(): Promise<void> {
         <h3>${escHtml(s.name)}</h3>
         <p>${escHtml(s.country || '')} ${s.language ? '• ' + escHtml(s.language) : ''}</p>
         <p>${escHtml(s.codec || '')} ${s.bitrate ? s.bitrate + ' kbps' : ''}</p>
-        <button data-play-map="${s.stationuuid}" aria-label="Riproduci ${escHtml(s.name)}">▶ PLAY</button>
+        <button data-play-map="${s.stationuuid}" aria-label="Play ${escHtml(s.name)}">▶ PLAY</button>
       </div>`;
     marker.bindPopup(popupHtml);
     markerCluster!.addLayer(marker);

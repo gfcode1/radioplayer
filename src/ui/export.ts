@@ -20,7 +20,7 @@ async function exportData(): Promise<void> {
     theme: store.theme,
   };
   const jsonBlob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  downloadBlob(jsonBlob, 'jukebox-backup.json');
+  downloadBlob(jsonBlob, 'gfradio-backup.json');
 
   /* M3U playlist */
   try {
@@ -33,13 +33,13 @@ async function exportData(): Promise<void> {
         m3u += `${s.url_resolved || s.url}\n\n`;
       });
       const m3uBlob = new Blob([m3u], { type: 'audio/x-mpegurl' });
-      downloadBlob(m3uBlob, 'jukebox-favorites.m3u');
+      downloadBlob(m3uBlob, 'gfradio-favorites.m3u');
     }
   } catch {
     /* ignore M3U errors */
   }
 
-  toast('Dati esportati (JSON + M3U)', 'success');
+  toast('Data exported (JSON + M3U)', 'success');
 }
 
 function downloadBlob(blob: Blob, filename: string): void {
@@ -85,10 +85,10 @@ function importData(event: Event): void {
         if (btn) btn.textContent = store.theme === 'dark' ? '🌙' : '☀';
       }
       store.save();
-      toast('Dati importati', 'success');
+      toast('Data imported', 'success');
       store.emit('section-changed');
     } catch {
-      toast('File non valido', 'error');
+      toast('Invalid file', 'error');
     }
   };
   reader.readAsText(file);
